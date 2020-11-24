@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './App.css';
 import CardList from './components/card-list/card-list.components'
-import SearchBox from './components/searxh-box/search-box.components'
+import SearchBox from './components/search-box/search-box.components'
 class App extends Component {
   constructor(){
   super()
@@ -17,7 +17,9 @@ class App extends Component {
       .then(users => users.json())
       .then(users => this.setState({monsters: users}))
   }  
-
+  handleChange =(event) => {
+    this.setState({searchField:event.target.value})
+  }
 
   render(){
     const {monsters, searchField} = this.state;
@@ -27,7 +29,7 @@ class App extends Component {
     return (
       <div className='App'>
         <SearchBox placeholder= "search monsters" 
-        handleChange= {event => this.setState({searchField:event.target.value})}/>
+        handleChange={this.handleChange}/>
         <CardList mons={filteredMonsters}/>
       </div>
     )
